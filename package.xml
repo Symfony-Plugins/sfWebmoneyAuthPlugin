@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+    <name>sfWebmoneyAuthPlugin</name>
+    <channel>pear.symfony-project.com</channel>
+    <summary>Easy way to authorize user thru Webmoney.Login interface</summary>
+    <description>The `sfWebmoneyAuthPlugin` is a symfony plugin that provides authentication and
+authorization features above the standard security feature of symfony.
+    </description>
+    <lead>
+        <name>Roman Gnatyuk</name>
+        <user>Fozzy</user>
+        <email>fozzy@hackers.net.ua</email>
+        <active>yes</active>
+    </lead>
+    <date>2011-02-17</date>
+    <version>
+        <release>1.0.3</release>
+        <api>1.0.3</api>
+    </version>
+    <stability>
+        <release>beta</release>
+        <api>beta</api>
+    </stability>
+    <license uri="http://www.symfony-project.com/license">MIT</license>
+    <notes>1.0.3
+                    * Added Webmoney.Passport functional.
+                    * Added helpers
+    </notes>
+    <contents>
+        <dir name="/">
+            <dir name="lib">
+                <dir name="helper">
+                    <file name="sfWebmoneyPassportHelper.php" role="data"/>
+                </dir>
+                <dir name="user">
+                    <file name="sfWebmoneyPassportAbstract.php" role="data"/>
+                    <file name="sfWebmoneyUser.class.php" role="data"/>
+                    <file name="sfWebmoneyPassport.class.php" role="data"/>
+                    <file name="sfWebmoneyPassportInterface.php" role="data"/>
+                </dir>
+                <dir name="validator">
+                    <file name="sfWebmoneyValidatorUser.class.php" role="data"/>
+                </dir>
+                <dir name="routing">
+                    <file name="sfWebmonyAuthRouting.class.php" role="data"/>
+                </dir>
+            </dir>
+            <dir name="config">
+                <file name="app.yml" role="data"/>
+                <file name="sfWebmoneyAuthPluginConfiguration.class.php" role="data"/>
+            </dir>
+            <file name="README" role="data"/>
+            <dir name="modules">
+                <dir name="sfWebmoneyAuth">
+                    <dir name="lib">
+                        <file name="BasesfWebmoneyAuthActions.class.php" role="data"/>
+                    </dir>
+                    <dir name="templates"/>
+                    <dir name="actions">
+                        <file name="actions.class.php" role="data"/>
+                    </dir>
+                </dir>
+            </dir>
+            <dir name="web">
+                <dir name="images">
+                    <dir name="attestat">
+                        <file name="300.gif" role="data"/>
+                        <file name="140.gif" role="data"/>
+                        <file name="170.gif" role="data"/>
+                        <file name="190.gif" role="data"/>
+                        <file name="110.gif" role="data"/>
+                        <file name="100.gif" role="data"/>
+                        <file name="200.gif" role="data"/>
+                        <file name="136.gif" role="data"/>
+                        <file name="135.gif" role="data"/>
+                        <file name="150.gif" role="data"/>
+                        <file name="120.gif" role="data"/>
+                        <file name="130.gif" role="data"/>
+                    </dir>
+                </dir>
+            </dir>
+            <file name="VERSION" role="data"/>
+            <file name="LICENSE" role="data"/>
+            <dir name="i18n"/>
+            <dir name="data">
+                <dir name="certs">
+                    <file name="WebMoneyCA.crt" role="data"/>
+                </dir>
+            </dir>
+        </dir>
+    </contents>
+
+    <dependencies>
+        <required>
+            <php>
+                <min>5.1.0</min>
+            </php>
+            <pearinstaller>
+                <min>1.4.1</min>
+            </pearinstaller>
+            <package>
+                <name>symfony</name>
+                <channel>pear.symfony-project.com</channel>
+                <min>1.3.0</min>
+                <max>1.4.9</max>
+            </package>
+        </required>
+    </dependencies>
+
+    <phprelease>
+    </phprelease>
+
+    <changelog>
+        <release>
+            <version>
+                <release>1.0.3</release>
+                <api>1.0.3</api>
+            </version>
+            <stability>
+                <release>beta</release
+                    >
+                <api>beta</api>
+            </stability>
+            <license uri="http://www.symfony-project.com/license">MIT</license>
+            <date>2011-02-17</date>
+            <notes>
+                    * Added Webmoney.Passport functional.
+                    * Added helpers
+            </notes>
+        </release>
+    </changelog>
+</package>

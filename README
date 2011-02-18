@@ -1,0 +1,139 @@
+# sfWebmoneyAuth plugin (for symfony 1.4) #
+
+The `sfWebmoneyAuthPlugin` is a symfony plugin that provides authentication and
+authorization features above the standard security feature of symfony.
+
+It gives you easy way to authorize user thru Webmoney.Login interface.
+
+Verion with native Doctrine and sfDoctrineGuardPlugin integration coming soon.
+
+## Installation ##
+
+  * Install the plugin (via a package)
+
+        symfony plugin:install sfWebmoneyAuthPlugin --stability=beta
+
+  * Activate the plugin in the `config/ProjectConfiguration.class.php`
+  
+        [php]
+        class ProjectConfiguration extends sfProjectConfiguration
+        {
+          public function setup()
+          {
+            $this->enablePlugins(array(
+              'sfDoctrinePlugin', 
+              'sfWebmoneyAuthPlugin',
+              '...'
+            ));
+          }
+        }
+
+  * Enable module for your frontend application:
+
+    all:
+      .settings:
+        enabled_modules:      [default, sfWebmoneyAuth]
+
+  * Publish your assets
+
+        $ symfony plugin:publish-assets
+
+  * Clear you cache
+
+        symfony cc
+
+### Configuration ###
+You need to add required settings to `app.yml`:
+
+  * Specify RID and holder WMID (See: [https://login.wmtransfer.com/Help.aspx?AK=description&lang=en-US](https://login.wmtransfer.com/Help.aspx?AK=description&lang=en-US))
+
+        all:
+          sf_webmoney_auth:
+            holder: 111111111111
+            RID: ffffffff-ffff-ffff-ffff-ffffffffffff
+
+### Secure your application ###
+
+To secure a symfony application:
+
+  * Enable the module `sfWebmoneyAuth` in `settings.yml`
+
+        all:
+          .settings:
+            enabled_modules: [..., sfWebmoneyAuth]
+
+  * Change the default login and secure modules in `settings.yml`
+
+        login_module:           sfWebmoneyAuth
+        login_action:           login
+        
+    N.B.: secure action not supported yet
+
+  * Change the parent class in `myUser.class.php`
+
+        class myUser extends sfWebmoneyAuthUser
+        {
+        }
+
+  * Optionally add the following routing rules to `routing.yml`
+
+        signin:
+          url:   /login
+          param: { module: sfWebmoneyAuth, action: login }
+        
+        signout:
+          url:   /logout
+          param: { module: sfWebmoneyAuth, action: logout }
+        
+
+    You can customize the `url` parameter of each route.
+    N.B.: You must have a `@homepage` routing rule or set redirect url in
+    `app.yml` (see below) (used when a user sign in/out)
+
+    These routes are automatically registered by the plugin if the module
+    `sfWebmoneyAuth` is enabled unless you defined `sf_webmoney_auth_route_register`
+    to false in the `app.yml` configuration file:
+
+        all:
+          sf_webmoney_auth:
+            routes_register: false
+
+  * Secure some modules or your entire application in `security.yml`
+
+        default:
+          is_secure: true
+
+  * You're done. Now, if you try to access a secure page, you will be redirected
+    to the login page.
+
+## Passport ##
+
+Sience version 1.0.3 plugin supports Webmoney.Passport functional (formely X11 xml protocol)
+
+Documentation is still in progress, but you can browse function in `sfWebmoneyPassport.class.php`.
+They are mostly self-documented :)
+
+## Validators ##
+
+`sfWebmoneyAuthPlugin` comes with a validator that you can use in your modules:
+`sfWebmoneyValidatorUser`.
+
+This validator is used by the `sfWebmoneyAuth` module to validate a ticket from
+Webmoney.Login and automatically signin the user.
+
+## Helpers ##
+
+Plugin offers a set of PHP helper functions which invoked common Passport actions.
+
+Just make sure you import the helper group `sfWebmoneyPassport` with a `use_helper` call:
+
+    use_helper('sfWebmoneyPassport');
+
+Link to Passport:
+
+    link_to_passport("Show passport", sfContext::getInstance()->getUser()->getWmid());
+
+Attestat image based on attestat tid:
+
+    attestat_image_tag(sfContext::getInstance()->getUser()->getPassport()->getAttestatId(),
+                array('alt' => sfContext::getInstance()->getUser()->getPassport()->getAttestat()));

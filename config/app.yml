@@ -1,0 +1,6 @@
+all:
+  sf_webmoney_auth:
+    cert:
+      ca: <?= sfConfig::get('sf_plugins_dir'); ?>/sfWebmoneyAuthPlugin/data/certs/WebMoneyCA.crt
+    xiface: https://login.wmtransfer.com/ws/authorize.xiface
+    routes_register: true
